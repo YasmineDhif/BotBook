@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+    color: #0A1B5F;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    text-align: center;
+}
+
+.left-column {
+    flex: 1; /* La colonne gauche prendra autant d'espace que possible */
+    padding: 20px; /* Ajoutez un espace autour du contenu si nécessaire */
+}
+
+.right-column {
+    flex: 1; /* La colonne droite prendra autant d'espace que possible */
+    padding: 20px; /* Ajoutez un espace autour du contenu si nécessaire */
+}
+
+.accueil-up, .formulaire {
+    text-align: center;
+    
+}
+
+
+
+ img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.formulaire {
+    flex: 1;
+    background-color: #2B2CEB;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: #fff;
+    align-content: center;
+    
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width:400px;
+   
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-links {
+    margin-bottom: 2px;
+    padding: 20px; 
+}
+
+.form-links a {
+    color: #000748;
+    font-style: italic ; 
+    
+    
+}
+
+/* Style du bouton de connexion */
+input[type="submit"] {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin:10px;
+}
+
+input[type="submit"]:hover {
+    background-color: #FF4653;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Empilez les colonnes les unes sur les autres sur un écran étroit */
+    }
+
+    .left-column,
+    .right-column {
+        flex: none; /* Réinitialisez la flexibilité pour que les colonnes ne prennent pas tout l'espace */
+    }
+}
