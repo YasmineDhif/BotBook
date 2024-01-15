@@ -5,7 +5,8 @@ include('partials/header.php');
     
     <div class="container">
         <div class="left-column">
-             <img src="img/logoBotBook.png" alt="logo">
+             <a href="index.php">
+              <img src="img/logoBotBook.png" alt="logo"></a>
              <p>Besoin de répertorier vos contacts personnels et professionnels dans un seul endroit?</p>
              <p>Essayer Botbook!</p>
 
@@ -28,7 +29,7 @@ include('partials/header.php');
                 <input type="password" id="password" name="password" required>
 
                 <div class="form-links">
-                <a href="preinitialisationmdp.php">Mot de passe oublié?</a>
+                <a href="pmdp.php">Mot de passe oublié?</a>
                 
                 </div>
                 <input type="submit" name="bConnexion" value="Se connecter">

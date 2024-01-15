@@ -19,40 +19,41 @@ body {
 }
 
 .right-column {
-    flex: 1; /* La colonne droite prendra autant d'espace que possible */
-    padding: 20px; /* Ajoutez un espace autour du contenu si nécessaire */
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    background-color: #0A1B5F;
 }
 
 .accueil-up, .formulaire {
-    text-align: center;
-    
+    text-align: center;  
 }
-
-
 
  img {
     max-width: 100%;
     height: auto;
 }
 
-
 .formulaire {
     flex: 1;
-    background-color: #2B2CEB;
+    
     padding: 50px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    color: #fff;
-    align-content: center;
-    
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    align-items: center;
+    justify-content: center; 
+    padding: 50px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    width:400px;
-   
+    width:400px;  
+    
 }
 
 label {
@@ -72,28 +73,36 @@ input {
 }
 
 .form-links a {
-    color: #000748;
+    color: #fff;
     font-style: italic ; 
-    
-    
 }
 
 /* Style du bouton de connexion */
 input[type="submit"] {
-    padding: 10px;
-    background-color: #007bff;
+    padding: 12px;
+    background-color: #4caf50; /* Couleur verte par exemple */
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin:10px;
+    margin: 10px 0;
 }
 
 input[type="submit"]:hover {
-    background-color: #FF4653;
+    background-color: #45a049; /* Couleur verte légèrement plus sombre au survol */
 }
 
-
+footer{
+    margin-bottom: 50px;
+    text-align: center;
+}
+hr{
+    border: 0;
+    height: 1px;
+    background: white;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    margin: 50px 150px 40px 150px;
+}
 
 
 
