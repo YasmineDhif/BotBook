@@ -1,21 +1,26 @@
-<?php 
-$title = "Admin-login";
-include('../header.php');
-require("admin-requeteSQL.php");
 
-if(isset($_POST['bConnexion'])){
-    $username = htmlspecialchars(strtolower(trim($_POST['username'])));
-    $password = htmlspecialchars(trim($_POST['password']));
-    if(connexionUser($username,$password)){
-        header("Location: ../plistcontact.php");// si le mdp et nom d'utilisateur sont correctes on se redirige vers la page liste contacts
-        exit; 
-    }else{
-        $message = "Le nom d'utilisateur et/ou le mot de passe sont/est incorrect.";
-        header('Location: ../pconnexion.php?message='.$message);exit;
-    }
+<?php session_start(); 
+include_once("admin-requestSQL.php"); 
 
-}else{
-    include('../pconnexion.php');
-}
+// Vérifie si le formulaire a été soumis 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {     
+// Récupére les valeurs du formulaire 
+$username = htmlspecialchars(strtolower(trim($_POST['username'])));   // trim 
+$password = htmlspecialchars(trim($_POST['password']));  
 
-?>
+ // Vérifie si l'utilisateur et le mot de passe dans la base de données  
+ if (checkUser($username, $password)) {      
+// Si les identifiants sont valides, rediriger vers repertoire.php    
+ header("Location: ../plistContact.php");         
+ exit(); 
+   
+ } else {        
+
+// Si les identifiants ne correspondent pas, rediriger vers pconnexion.php avec un message d'erreur                           
+$message = "Identifiant ou mot de passe incorrect.";       
+ header("Location: ../pconnexion.php");         
+ exit();    
+ } } else {    
+  
+ header("Location: ../pconnexion.php");     
+ exit(); } ?>

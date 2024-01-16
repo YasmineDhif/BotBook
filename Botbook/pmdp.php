@@ -1,16 +1,18 @@
 <?php
-$title = "Réinitialisation du mot de passe";
+$title = "Changer le mot de passe";
 include('partials/header.php');
 ?>
 
 
     <div class="accueil-up">
-    <a href="index.php">
-              <img src="img/logoBotBook.png" alt="logo"></a>
-        <h1><?php echo $title; ?></h1>
+        <a href="index.php">
+                  <img src="img/logoBotBook.png" alt="logo"></a>
+         
     </div>
 
-  
+  <div class="formmdp">
+
+    <h1><?php echo $title; ?></h1>
     <form action="admin/admin-pmdp.php" method="post"> 
       
       
@@ -28,8 +30,12 @@ include('partials/header.php');
     
       <input type="submit" name="bReset" value="Réinitialiser">
     </form>
-    <a href="index.php">Retour à la page d'accueil</a>
 
+    <div class="form-links">
+    <a href="index.php">Retour à la page d'accueil</a>
+    </div>
+    
+</div>
 
       <?php
     include('partials/footer.php');?>

@@ -4,16 +4,16 @@ include('partials/header.php');
 session_start();
 ?>
 
-<section>
-    <div class="accueil-up">
-    <a href="index.php">
-              <img src="img/logoBotBook.png" alt="logo"></a>
-        <h1><?php echo $title; ?></h1>
-    </div>
+
+      <div class="accueil-up">
+          <a href="index.php">
+          <img src="img/logoBotBook.png" alt="logo"></a>
+        
+      </div>
   
 
 <div class="forminscription">
-  
+  <h1><?php echo $title; ?></h1>
     <form action="admin/admin-inscription.php" method="POST">
 
         <label for="name"></label>
@@ -51,8 +51,12 @@ session_start();
         
         <input type="submit" name="bInscription" value="S'inscrire">
       </form>
-      <a href="index.php">Retour à la page d'accueil</a>
 
+      <div class="form-links">
+      <a href="index.php">Retour à la page d'accueil</a>
+    </div>
+    
+</div>
 
       <?php
     include('partials/footer.php');?>
