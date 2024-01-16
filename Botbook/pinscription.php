@@ -25,9 +25,6 @@ session_start();
         <label for="username"></label>
         <input name="username" type="text" id="username" placeholder="Nom d'utilisateur *"  required>
 
-        <label for="birthday"></label>
-        <input name="birthday" type="date" id="birthday" placeholder="Date de naissance">
-
         <label for="email"></label>
         <input name="email" type="email" id="email" placeholder="E-mail*"  required>
 
