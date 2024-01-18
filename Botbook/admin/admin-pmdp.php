@@ -4,7 +4,6 @@ require('admin-requestSQL.php');
 
 if (isset($_POST['bReset'])) {
     $username = $_POST['username'];
-    $question = $_POST['question'];
     $answer = $_POST['answer'];
     $newPassword = $_POST['newPassword'];
 

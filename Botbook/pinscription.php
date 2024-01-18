@@ -16,8 +16,8 @@ session_start();
   <h1><?php echo $title; ?></h1>
     <form action="admin/admin-inscription.php" method="POST">
 
-        <label for="name"></label>
-        <input name="name" type="text" id="name" placeholder="Nom" >
+        <label for="lastname"></label>
+        <input name="lastname" type="text" id="lastname" placeholder="Nom" >
 
         <label for="firstname"></label>
         <input name="firstname" type="text" id="firstname" placeholder="Prénom" >
@@ -31,8 +31,8 @@ session_start();
         <label for="email2"></label>
         <input name="email2" type="email" id="email2" placeholder="Confirmation de l'E-mail*"  required>
 
-        <label for="password"></label>
-        <input name="password" type="password" id="password" name="password" placeholder="Mot de passe*" required>
+        <label for="password1"></label>
+        <input name="password1" type="password" id="password1" placeholder="Mot de passe*" required>
 
         <label for="password2"></label>
         <input name="password2" type="password" id="password2" placeholder="Confirmation du mot de passe*" required>
