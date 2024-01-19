@@ -7,13 +7,7 @@ if (isset($_POST['bReset'])) {
     $answer = $_POST['answer'];
     $newPassword = $_POST['newPassword'];
 
-    // Connexion à la base de données
-    $mysqli = new mysqli('localhost', 'root', '', 'le_bottin');
-
-    // Vérification de la connexion
-    if ($mysqli->connect_error) {
-        die("Erreur de connexion à la base de données: " . $mysqli->connect_error);
-    }
+   
 
     // Vérification de la question et de la réponse dans la base de données pour l'utilisateur
     $stmt = $mysqli->prepare("SELECT * FROM user WHERE username = ? AND question = ? AND answer = ?");
