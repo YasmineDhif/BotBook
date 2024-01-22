@@ -13,6 +13,19 @@ body {
     text-align: center;
 }
 
+.contner {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.2);
+  }
+  .small-container {
+    max-width: 600px;
+  }
+
 .left-column {
     flex: 1; /* La colonne gauche prendra autant d'espace que possible */
     padding: 20px; /* Ajoutez un espace autour du contenu si nécessaire */
@@ -66,7 +79,12 @@ form {
     width:300px;  
     
 }
-
+.input-group {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex-grow: 1;
+  }
 label {
     margin-bottom: 5px;
 }

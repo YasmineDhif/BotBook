@@ -10,15 +10,15 @@ if (isset($_POST['bReset'])) {
    
 
     // Vérification de la question et de la réponse dans la base de données pour l'utilisateur
-    $stmt = $mysqli->prepare("SELECT * FROM user WHERE username = ? AND question = ? AND answer = ?");
-    $stmt->bind_param("sss", $username, $question, $answer);
+    $stmt = $mysqli->prepare("SELECT * FROM user WHERE username = ? AND answer = ?");
+    $stmt->bind_param("sss", $username, $answer);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows === 1) {
-        // Si la question et la réponse sont correctes, mettre à jour le mot de passe
-        $stmt_update = $mysqli->prepare("UPDATE user SET password = ? WHERE username = ?");
-        $stmt_update->bind_param("ss", $new_password, $username);
+        // Si  la réponse est correcte, mettre à jour le mot de passe
+        $stmt_update = $mysqli->prepare("UPDATE user SET newpassword = ? WHERE username = ?");
+        $stmt_update->bind_param("ss", $newpassword, $username);
         $stmt_update->execute();
 
         if ($stmt_update->affected_rows > 0) {
@@ -30,7 +30,7 @@ if (isset($_POST['bReset'])) {
 
         $stmt_update->close();
     } else {
-        echo "Question ou réponse incorrecte. Veuillez réessayer.";
+        echo "réponse est incorrecte. Veuillez réessayer.";
     }
 
     // Fermeture de la connexion et du statement

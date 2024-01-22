@@ -52,3 +52,29 @@ function checkUser($username, $password1)
   }
   return false;
 }
+
+
+// fonction ajout de contact dans la base de données
+function insertContact( $lastname, $firstname, $email, $phone, $address, $user_id) {
+  global $bdd;
+
+  $sqlContact = "INSERT INTO contact (lastname, firstname, email, phone, address, user_id ) VALUES (:lastname, :firstname, :email, :phon, :address, :user_id)";
+  
+  $stmt = $bdd->prepare($sqlContact);
+
+  
+  $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
+  $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
+  $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+  $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+  $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+  $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+  try {
+      $stmt->execute();
+      return true;
+  } catch (PDOException $e) {
+      error_log("Erreur lors de l'ajout du contact : " . $e->getMessage());
+      return false; 
+}
+}
