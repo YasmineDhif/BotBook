@@ -21,24 +21,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-function getUserData($username)
-{
-    global $bdd;
-    $sql = "SELECT id, answer FROM user WHERE username = :username";
-    $stmt = $bdd->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-function updatePassword($userId, $newPassword)
-{
-    global $bdd;
-    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-    $sql = "UPDATE user SET password1 = :password1 WHERE id = :id";
-    $stmt = $bdd->prepare($sql);
-    $stmt->bindParam(':password1', $hashedPassword, PDO::PARAM_STR);
-    $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
-    $stmt->execute();
-}
 ?>
