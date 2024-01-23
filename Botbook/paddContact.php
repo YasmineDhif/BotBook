@@ -2,20 +2,15 @@
 $title = "Ajouter un contact";
 include('partials/header.php');
 
-/*echo "<pre>";
-var_dump($_GET);
-echo "</pre>";
-
-echo "<pre>";
-var_dump($_POST);
-echo "</pre>";
-*/
 ?>
-<div class="contner small-container">
-<a href="index.php">
-              <img src="img/logoBotBook.png" alt="logo"></a>
+
+<div class="accueil-up">
+          <a href="index.php">
+          <img src="img/logoBotBook.png" alt="logo"></a>
+          <h1><?php echo $title; ?></h1>
+      </div>
               
-              <h1><?php echo $title; ?></h1>
+      <div class="forminscription">
     <form action="admin/admin-addContact.php" method="POST">
 
         <div class="input-group">
@@ -32,7 +27,7 @@ echo "</pre>";
         </div>
         <div class="input-group">
             <label for="phone">Téléphone</label>
-            <input type="number" name="phone" id="phone">
+            <input type="phone" name="phone" id="phone">
         </div>
         <div class="input-group">
             <label for="address">Adresse</label>
@@ -43,6 +38,8 @@ echo "</pre>";
         <input type="submit" name="bAdd" value="Ajouter">
         </div>
     </form>
-
+    <div class="form-links">
+      <a href="plistContact.php">Retour à la liste de contact</a>
+    </div>
 </div>
 <?php require_once("partials/footer.php"); ?>

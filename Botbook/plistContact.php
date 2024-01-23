@@ -1,56 +1,66 @@
 <?php
 $title = "Votre liste de contact";
 include('partials/header.php');
-session_start();
+include('admin/admin-requestSQL.php');
+// Assurez-vous que l'utilisateur est connecté
+if (!isset($_SESSION["user_id"])) {
+    header("Location: pconnexion.php");
+    exit();
+}
 
+// Incluez ici vos fichiers nécessaires, tels que les fichiers de configuration et la connexion à la base de données.
+
+// Utilisez la fonction pour récupérer la liste des contacts de l'utilisateur
+$contacts = getContacts($_SESSION["user_id"]);
 ?>
+<div class="accueil-up">
+<a href="index.php">
+    <img src="img/logoBotBook.png" alt="logo">
+</a>
+<h1><?php echo $title; ?></h1>
+</div>
 
- <a href="index.php">
-              <img src="img/logoBotBook.png" alt="logo"></a>
-              
-              <h1><?php echo $title; ?></h1>
 
-              <a href="pconnexion.php">Deconnexion</a>
-              <form action="paddContact.php" method="POST">
-                                    <button type="submit" name="bAdd">Ajouter un contact</button>
-                                </form> 
-<?php if (!isset($_SESSION["list_contact"]) || empty($_SESSION["list_contact"])) : ?>
-        <p>Liste de contact vide</p>
-    <?php else : ?>
 
-<table>
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Email</th>
-                        <th>téléphone</th>
-                        <th>Addresse</th>
-                        <th>Action</th>
-                        
-                    </tr>
-                </thead>
-                     <tbody>
-                        <?php foreach
-                        ($_SESSION['list_contact'] as $key => $donnees) :?>
-                            
-                            <tr>
-                                <td><?php echo $donnees ['lastname'];?></td>
-                                <td><?php echo $donnees ['firstname'];?></td>
-                                <td><?php echo $donnees ['email'];?></td>
-                                <td><?php echo $donnees ['phone'];?></td>
-                                <td><?php echo $donnees ['address'];?></td>
-                                <td>
-                                 <a href="edit_product.php?do=form_edit&key=<?php echo $donnees ?>">Modifier</a>
-                                 <a href="list_product.php?do=delete_product&key=<?php echo $donnees ?>" class="danger">Supprimer</a>
-                               </td>
+<a href="pconnexion.php">Deconnexion</a>
 
-                            </tr>
-                        
-                    </tbody>
-                    <?php endforeach;?>
-<table>
+<form action="paddContact.php" method="POST">
+<input type="submit" name="bAdd" value="+Ajouter un contact">
+</form>
 
-<?php endif;?>
+<?php if (!$contacts) : ?>
+    <p>Liste de contact vide</p>
+<?php else : ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($contacts as $donnees) : ?>
+                <tr>
+                    <td><?php echo $donnees['lastname']; ?></td>
+                    <td><?php echo $donnees['firstname']; ?></td>
+                    <td><?php echo $donnees['email']; ?></td>
+                    <td><?php echo $donnees['phone']; ?></td>
+                    <td><?php echo $donnees['address']; ?></td>
+            <td>
+            <a href="pmodContact.php?key=<?php echo $donnees['id']; ?>" class="bEdit">Modifier</a>
+            <form action="admin/admin-deleteContact.php" method="post" style="display:inline;">
+                <input type="hidden" name="contact_id" value="<?php echo $donnees['id']; ?>">
+                <button type="submit" class="bDel" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contact ?')">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+<?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
 
 <?php require_once("partials/footer.php"); ?>

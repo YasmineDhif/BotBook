@@ -3,7 +3,6 @@ $title = "Changer le mot de passe";
 include('partials/header.php');
 ?>
 
-
     <div class="accueil-up">
         <a href="index.php">
                   <img src="img/logoBotBook.png" alt="logo"></a>

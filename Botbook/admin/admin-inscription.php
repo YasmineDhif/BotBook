@@ -30,5 +30,15 @@ if(isset($_POST['bInscription'])){
         header("Location: ../pconnexion.php");
         exit();
     }
+    $insertResult = insertdata($nom, $prenom, $username, $password, $email, $questionSecrete, $reponseSecrete);
+    if ($insertResult === 'username_exists') {
+        echo "";
+    
+    } else {
+        echo "l'identifiants est déjà utilisé";
+    }
+    header("Location: ../pinscription.php");
+    exit;
 }
+
 ?>

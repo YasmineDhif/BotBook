@@ -1,40 +1,44 @@
 <?php
-session_start();
-require('admin-requestSQL.php');
+require("admin-requestSQL.php");
 
-if (isset($_POST['bReset'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Récupérer les données du formulaire
     $username = $_POST['username'];
     $answer = $_POST['answer'];
     $newPassword = $_POST['newPassword'];
 
-   
+    // Vérifier la validité de l'utilisateur et récupérer la question et la réponse
+    $userData = getUserData($username);
 
-    // Vérification de la question et de la réponse dans la base de données pour l'utilisateur
-    $stmt = $mysqli->prepare("SELECT * FROM user WHERE username = ? AND answer = ?");
-    $stmt->bind_param("sss", $username, $answer);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows === 1) {
-        // Si  la réponse est correcte, mettre à jour le mot de passe
-        $stmt_update = $mysqli->prepare("UPDATE user SET newpassword = ? WHERE username = ?");
-        $stmt_update->bind_param("ss", $newpassword, $username);
-        $stmt_update->execute();
-
-        if ($stmt_update->affected_rows > 0) {
-            echo "Mot de passe réinitialisé avec succès!";
-            header('Location: pconnexion.php');
-        } else {
-            echo "Échec de la réinitialisation du mot de passe.";
-        }
-
-        $stmt_update->close();
+    if ($userData && $userData['answer'] == $answer) {
+        // Mettre à jour le mot de passe
+        updatePassword($userData['id'], $newPassword);
+        echo "Mot de passe mis à jour avec succès.";
+        header("Location: ../pconnexion.php");
+        exit();
     } else {
-        echo "réponse est incorrecte. Veuillez réessayer.";
+        echo "Réponse secrète incorrecte. Veuillez réessayer.";
     }
+}
 
-    // Fermeture de la connexion et du statement
-    $stmt->close();
-    $mysqli->close();
+function getUserData($username)
+{
+    global $bdd;
+    $sql = "SELECT id, answer FROM user WHERE username = :username";
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function updatePassword($userId, $newPassword)
+{
+    global $bdd;
+    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    $sql = "UPDATE user SET password1 = :password1 WHERE id = :id";
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':password1', $hashedPassword, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
 }
 ?>

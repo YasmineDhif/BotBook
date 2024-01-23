@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+    color: #0A1B5F;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    text-align: center;
+}
+
+.contner {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.2);
+  }
+  .small-container {
+    max-width: 600px;
+  }
+
+.left-column {
+    flex: 1; /* La colonne gauche prendra autant d'espace que possible */
+    padding: 20px; /* Ajoutez un espace autour du contenu si nécessaire */
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    background-color: #0A1B5F;
+    
+}
+
+.accueil-up, .formulaire {
+    text-align: center;  
+}
+
+ img {
+    max-width: 100%;
+    height: auto;
+}
+
+.formulaire,
+.forminscription {
+    flex: 1;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    align-items: center;
+    justify-content: center; 
+    padding: 50px;
+}
+
+.forminscription,
+.formmdp
+{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    background-color: #0A1B5F;
+    margin: 0 25%;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    width:300px;  
+    
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex-grow: 1;
+  }
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-links {
+    margin-bottom: 2px;
+    padding: 20px; 
+}
+
+.form-links a {
+    color: #fff;
+    font-style: italic ; 
+}
+
+/* Style du bouton de connexion */
+input[type="submit"] {
+    padding: 12px;
+    background-color: #4caf50; 
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+input[type="submit"]:hover {
+    background-color: #2B2CEB; 
+}
+
+footer{
+    margin: 50px;
+    text-align: center;
+}
+
+/* Style du tableau */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #0A1B5F;
+    color: white;
+}
+
+/* Style des boutons Modifier et Supprimer dans le tableau */
+.bEdit, .bDel {
+    padding: 8px 12px;
+    background-color: #2196F3; /* Bleu pour Modifier */
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.bDel {
+    background-color: #f44336; /* Rouge pour Supprimer */
+}
+
+.formulaire {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Style du bouton Ajouter un contact dans le formulaire */
+.formulaire button {
+    padding: 12px;
+    background-color: #4caf50; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.formulaire button:hover {
+    background-color: #2B2CEB; 
+}
+
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Empilez les colonnes les unes sur les autres sur un écran étroit */
+    }
+
+    .left-column,
+    .right-column {
+        flex: none; /* Réinitialisez la flexibilité pour que les colonnes ne prennent pas tout l'espace */
+    }
+
+    .forminscription,
+    .formmdp {
+        margin: 0 ;
+    }
+
+
+    table {
+        font-size: 14px; /* Ajustez la taille de la police pour les écrans plus petits */
+        overflow-x: auto; /* Ajoute une barre de défilement horizontal si nécessaire */
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    /* Pour rendre les boutons Modifier et Supprimer plus compacts */
+    .bEdit, .bDel {
+        padding: 6px 10px;
+    }
+
+}

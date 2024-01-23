@@ -1,6 +1,8 @@
 <?php
 require("admin-requestSQL.php");
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if(isset($_POST["bAdd"])){ 
     // Récupération de l'ID de l'utilisateur connecté et des données du formulaire

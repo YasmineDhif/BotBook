@@ -1,38 +1,42 @@
 <?php
-session_start();
-require('admin-requestSQL.php');
-
-if (isset($_POST['bEditContact'])) {
-    // Récupération des données du formulaire
-    $contactId = $_POST['contactId'];
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $email = $_POST['email'];
-    $telephone = $_POST['telephone'];
-    $adresse = $_POST['adresse'];
-    $entreprise = $_POST['entreprise'];
-    $dateDeNaissance = $_POST['dateDeNaissance'];
-    $note = $_POST['note'];
-
-    // Vérification que les champs requis sont remplis
-    if (empty($nom) || empty($prenom) || empty($telephone)) {
-        setMessage('error', "Tous les champs marqués d'un * sont obligatoires.");
-        header("Location: ../peditContact.php?contactId=".$contactId);
-        exit;
-    }
-
-    // Mise à jour des données dans la base de données
-    $result = editContact($contactId, $nom, $prenom, $email, $telephone, $adresse, $entreprise, $dateDeNaissance, $note);
-
-    if ($result === true) {
-        setMessage('success', "Contact mis à jour avec succès.");
-    } else {
-        setMessage('error', "Erreur lors de la mise à jour du contact : " . $result);
-    }
-} else {
-    setMessage('error', "Aucune donnée de formulaire reçue.");
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 
-header("Location: ../paccueil.php");
-exit;
+include('admin-requestSQL.php');
+
+if (isset($_GET['key'])) {
+    $contact_id = $_GET['key'];
+    $user_id = $_SESSION["user_id"];
+
+    $contact = getContactDetails($contact_id, $user_id);
+
+    if (!$contact) {
+        echo "Contact non trouvé ou vous n'avez pas les autorisations nécessaires.";
+        exit();
+    }
+
+    if (isset($_POST['bEdit'])) {
+        $lastname = $_POST['lastname'];
+        $firstname = $_POST['firstname'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $address = $_POST['address'];
+
+        if (updateContact($contact_id, $user_id, $lastname, $firstname, $email, $phone, $address)) {
+            echo "Le contact a été modifié avec succès.";
+            // Rediriger vers plistContact.php après la modification
+            header("Location: ../plistContact.php");
+            exit();
+        } else {
+            echo "Erreur lors de la modification du contact.";
+        }
+    } else {
+        // Le formulaire n'a pas été soumis, affichez un message d'erreur si nécessaire
+        echo "Paramètres manquants.";
+    }
+} else {
+    // La clé n'est pas définie, affichez un message d'erreur si nécessaire
+    echo "Paramètres manquants.";
+}
 ?>
