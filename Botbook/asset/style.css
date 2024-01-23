@@ -4,8 +4,8 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #fff;
     color: #0A1B5F;
-    margin: 0;
-    padding: 0;
+    margin: 0 auto;
+    
 }
 
 .container {
@@ -28,7 +28,7 @@ body {
 
 .left-column {
     flex: 1; /* La colonne gauche prendra autant d'espace que possible */
-    padding: 20px; /* Ajoutez un espace autour du contenu si nécessaire */
+    padding: 20px; 
 }
 
 .right-column {
@@ -126,22 +126,88 @@ footer{
     text-align: center;
 }
 
+/* Style du tableau */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
 
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #0A1B5F;
+    color: white;
+}
+
+/* Style des boutons Modifier et Supprimer dans le tableau */
+.bEdit, .bDel {
+    padding: 8px 12px;
+    background-color: #025293; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.bDel {
+    background-color: #b11105; 
+}
+
+.formulaire {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Style du bouton Ajouter un contact dans le formulaire */
+.formulaire button {
+    padding: 12px;
+    background-color: #4caf50; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.formulaire button:hover {
+    background-color: #2B2CEB; 
+}
 
 
 
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Empilez les colonnes les unes sur les autres sur un écran étroit */
+        flex-direction: column;
     }
 
     .left-column,
     .right-column {
-        flex: none; /* Réinitialisez la flexibilité pour que les colonnes ne prennent pas tout l'espace */
+        flex: none; 
     }
 
     .forminscription,
     .formmdp {
         margin: 0 ;
     }
+
+
+    table {
+        font-size: 14px; 
+        overflow-x: auto; 
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    /* Pour rendre les boutons Modifier et Supprimer plus compacts */
+    .bEdit, .bDel {
+        padding: 6px 10px;
+    }
+
 }

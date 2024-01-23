@@ -1,0 +1,29 @@
+Description du projet: 
+Annuaire téléphonique. L'utilisateur, en se connectant peut créer une liste de contact où il pourra encodée les information personnels de ceux-ci. Il aura la possibilité de les modifier et supprimer. 
+
+La structure:
+-   Le dossier "assets" comprend les fichiers css.
+-   Le dossier "admin" comprend les fichiers php de traitement (logiques, variables, fonctions)
+-   Le dossier "partials" comprend les parties de "vues" qui vont être inclus dans le projet (header, footer)
+-   Le dossier "img" comprend le logo
+-   Le dossier "csv" est consacré à la partie svg de fichiers
+-   Le fichier "botbook.sql" est la bdd
+-   Les autres fichiers sont les vues principales du projet
+
+Connexion: 
+
+Pour se connecter utiliser:
+nom d'utilisateur: ydhif
+mot de passe: dhif
+
+
+Liens et documents utiles:
+
+-lien figma (présent dans ce lien: la partie desktop et mobile)
+https://www.figma.com/file/LBQkrTJKcqCyRsoTBXo4Gf/Untitled?type=design&mode=design&t=tlbtykw76QMlB8kY-1
+
+-lien Trello
+https://trello.com/invite/b/ybPF8ecv/ATTIb66bf25648b5bd99203371dda9728391C37C7A25/botbook
+
+-Le dictionnaire de données, le MCD et MLD se retrouve dans le fichier "DD_MLD_MCD.docx"
+

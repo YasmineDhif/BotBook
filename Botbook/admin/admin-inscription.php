@@ -1,8 +1,13 @@
 <?php
+
 require("admin-requestSQL.php");
+
+// Démarrage de la session 
 session_start();
 
+// Vérificatie si le formulaire d'inscription a été soumis
 if(isset($_POST['bInscription'])){
+    // Récupére les données du formulaire
     $lastname = htmlspecialchars(strtolower(trim($_POST['lastname'])));
     $firstname = htmlspecialchars(trim($_POST['firstname']));
     $username = htmlspecialchars(strtolower(trim($_POST['username'])));
@@ -13,32 +18,33 @@ if(isset($_POST['bInscription'])){
     $question = htmlspecialchars(trim($_POST['question']));
     $answer = htmlspecialchars(trim($_POST['answer']));
 
-    //var_dump($password, $password); 
-    // Vérification si les mots de passes sont identiques
+    // Vérifie si les mots de passe ne correspondent pas
     if ($password1 !== $password2) {
         echo "Les mots de passe ne correspondent pas. Veuillez réessayer.";
-        
     } 
-    // Vérification si les adresses email sont identiques
+    // Vérifie si les adresses email ne correspondent pas
     elseif ($email !== $email2) {
         echo "Les adresses email ne correspondent pas. Veuillez les saisir à nouveau.";
-       
     } else {
-        //inscription bdd
+        // Insertion des données dans la base de données
         insertdata($lastname, $firstname, $username, $email, $password1, $question, $answer);
-        // Les mots de passe et les adresses email sont identiques.
+        
         header("Location: ../pconnexion.php");
         exit();
     }
+
+    //Insertion des données dans la base de données
     $insertResult = insertdata($nom, $prenom, $username, $password, $email, $questionSecrete, $reponseSecrete);
+
+    // Vérification du résultat de l'insertion
     if ($insertResult === 'username_exists') {
-        echo "";
-    
+        echo ""; // Le nom d'utilisateur existe déjà
     } else {
-        echo "l'identifiants est déjà utilisé";
+        echo "l'identifiants est déjà utilisé"; // Un autre type d'erreur
     }
+
+    // Redirection vers la page d'inscription en cas d'erreur
     header("Location: ../pinscription.php");
     exit;
 }
-
 ?>

@@ -99,22 +99,35 @@ var_dump($user_id);  // Ajout de cet var_dump pour afficher l'identifiant de l'u
 }
 }
 
-function getContacts($user_id) {
-  global $bdd;
+//Fonction pour récupérer la liste des contacts d'un utilisateur
+ 
+function getContacts($user_id)
+{
+    global $bdd;
 
-  $sql = "SELECT id, lastname, firstname, email, phone, address, user_id FROM contact WHERE user_id = :user_id"; // Ajout de la colonne 'user_id'
-  $stmt = $bdd->prepare($sql);
-  $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    // Requête SQL pour récupérer les contacts de l'utilisateur
+    $sql = "SELECT id, lastname, firstname, email, phone, address, user_id FROM contact WHERE user_id = :user_id";
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
-  try {
-      $stmt->execute();
-      $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $contacts;
-  } catch (PDOException $e) {
-      error_log("Erreur lors de la récupération des contacts : " . $e->getMessage());
-      return false;
-  }
+    try {
+        
+        $stmt->execute();
+        
+        // On récupère tous les résultats sous forme de tableau 
+        $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // On retourne le tableau des contacts
+        return $contacts;
+    } catch (PDOException $e) {
+        // En cas d'erreur, on enregistre le message d'erreur dans les logs
+        error_log("Erreur lors de la récupération des contacts : " . $e->getMessage());
+        
+        // On retourne false pour indiquer qu'il y a eu une erreur
+        return false;
+    }
 }
+
 
 function deleteContact($contact_id, $user_id) {
   global $bdd;
@@ -132,6 +145,8 @@ function deleteContact($contact_id, $user_id) {
       return false;
   }
 }
+
+//Fonction pour récupérer les détails d'un contact spécifié par son ID et l'ID de l'utilisateur.
 
 function getContactDetails($contact_id, $user_id) {
   global $bdd;
@@ -173,55 +188,75 @@ function updateContact($contact_id, $user_id, $lastname, $firstname, $email, $ph
   }
 }
 
+
+
+
+//Fonction pour importer des contacts depuis un fichier CSV.
+
 function importCSV($file)
 {
+    // On récupère l'ID de l'utilisateur depuis la session
     $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
+    // Si l'ID de l'utilisateur n'est pas trouvé dans la session, on arrête le script
     if (!$user_id) {
         exit('User ID not found in session.');
     }
 
+    // On ouvre le fichier CSV en mode lecture
     $handle = fopen($file, "r");
 
-    $mysqli = new mysqli('localhost', 'root', '', 'adb_login');
+    // On crée une nouvelle instance de mysqli pour la connexion à la base de données
+    $mysqli = new mysqli('localhost', 'root', '', 'botbook');
 
+    // Si la connexion à la base de données échoue, on affiche un message d'erreur et on arrête le script
     if ($mysqli->connect_errno) {
         echo "Failed to connect to MySQL: " . $mysqli->connect_error;
         exit();
     }
 
+    // On parcourt chaque ligne du fichier CSV
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-      $lastname = $data[0];
-      $firstname = $data[1];
-      $email = $data[2];
-      $phone = $data[3];
-      $address = $data[4];
+        $lastname = $data[0];
+        $firstname = $data[1];
+        $email = $data[2];
+        $phone = $data[3];
+        $address = $data[4];
 
-      insertContact($lastname, $firstname, $email, $phone, $address, $user_id);
-  }
+        // On appelle la fonction insertContact pour insérer chaque contact dans la base de données
+        insertContact($lastname, $firstname, $email, $phone, $address, $user_id);
+    }
 
+    // On ferme le fichier CSV et la connexion à la base de données
     fclose($handle);
     $mysqli->close();
 }
 
+//Fonction pour uploader un contact dans la base de données.
+
 function uploadContact($lastname, $firstname, $email, $phone, $address, $user_id, $notes)
 {
-    $mysqli = new mysqli('localhost', 'root', '', 'adb_login');
+    $mysqli = new mysqli('localhost', 'root', '', 'botbook');
 
+    // Si la connexion à la base de données échoue, on affiche un message d'erreur et on arrête le script
     if ($mysqli->connect_errno) {
         echo "Failed to connect to MySQL: " . $mysqli->connect_error;
         exit();
     }
 
-    $stmt = $mysqli->prepare("INSERT INTO adds (lastname, firstname, email, phone, address, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    // On prépare une requête SQL pour insérer le contact dans la table 'adds'
+    $stmt = $mysqli->prepare("INSERT INTO adds (lastname, firstname, email, phone, address, user_id) VALUES (?, ?, ?, ?, ?, ?)");
 
+    // Si la préparation de la requête est réussie
     if ($stmt) {
-        $stmt->bind_param("sssssis", $lastname, $firstname, $email, $phone, $address, $notes, $user_id);
+        $stmt->bind_param("ssssis", $lastname, $firstname, $email, $phone, $address, $user_id);
         $stmt->execute();
 
+        // Si une erreur survient lors de l'exécution de la requête, on affiche un message d'erreur
         if ($stmt->errno) {
             echo "Failed to add user: " . $stmt->error;
         } else {
+            // Sinon, on affiche un message de succès, puis on redirige vers la page 'listContact.php'
             echo "User added successfully";
             header("Location: listContact.php");
             exit();
